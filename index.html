@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>React Technical Documentation</title>
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <nav id="navbar">
@@ -14,58 +17,304 @@
         <a href="#Rendering_Elements" class="nav-link">Rendering Elements</a>
         <a href="#Components_and_Props" class="nav-link">Components and Props</a>
         <a href="#State_and_Lifecycle" class="nav-link">State and Lifecycle</a>
-        <a href="#Handling_Event" class="nav-link">Handling Events</a>
-        <a href="#Conditional_Rendering" class="nav-link">Conditional Rendering</a>
-        <a href="#List_and_Keys" class="nav-link">List and Keys</a>
-        <a href="#Forms" class="nav-link">Forms</a>
-        <a href="#Lifting_State_Up" class="nav-link">Lifting State Up</a>
-        <a href="#Composition_vs_Inheritance" class="nav-link">Composition vs Inheritance</a>
-        <a href="#Thinking_In_React" class="nav-link">Thinking In React</a>
+        <a href="#Handling_Events" class="nav-link">Handling Events</a>
     </nav>
     <main id="main-doc">
         <section class="main-section" id="Introduction">
-            <header>Introduction</header>
+            <header class="main-section-header">Introduction</header>
+            <p>In computing, React (sometimes React.js or ReactJS) is a JavaScript library for building user interfaces.</p>
+            <p>It is maintained by Facebook, Instagram and a community of individual developers and corporations.</p>
+            <p>React can be used in the development of single-page applications and mobile applications. It aims primarily to provide speed, simplicity, and scalability. As a user interface library, React is often used in conjunction with other libraries such as Redux.</p>
         </section>
         <section class="main-section" id="Hello_World">
-            <header>Hello World</header>
+            <header class="main-section-header">Hello World</header>
+            <p>The easiest way to get started with React is to use this Hello World example code on CodePen. You don’t need to install anything; you can just open it in another tab and follow along as we go through examples. If you’d rather use a local development environment, check out the Installation section.
+            <p>The smallest React example looks like this:</p>
+            <code>ReactDOM.render(
+                    <h1>Hello, world!</h1>,
+                    document.getElementById('root')
+                  );</code>
+            <p>It renders a heading saying “Hello, world!” on the page.</p>
+            <p>The next few sections will gradually introduce you to using React. We will examine the building blocks of React apps: elements and components. Once you master them, you can create complex apps from small reusable pieces.</p>
         </section>
         <section class="main-section" id="Introducing_JSX">
-            <header>Introducing JSX</header>
-        </section>
+            <header class="main-section-header">Introducing JSX</header>
+            <h2>Consider this variable declaration:</h2>
+            <code>const element = <h1>Hello, world!</h1>;</code>
+            <p>This funny tag syntax is neither a string nor HTML.
+                It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.
+                JSX produces React “elements”. We will explore rendering them to the DOM in the next section. Below, you can find the basics of JSX necessary to get you started.
+            </p>
+            <h2>Why JSX?</h2>
+            <p>React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.
+                Instead of artificially separating technologies by putting markup and logic in separate files, React separates concerns with loosely coupled units called “components” that contain both. We will come back to components in a further section, but if you’re not yet comfortable putting markup in JS, this talk might convince you otherwise.
+                React doesn’t require using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code. It also allows React to show more useful error and warning messages.
+                With that out of the way, let’s get started!
+            </p>
+            <h2>Embedding Expressions in JSX</h2>
+            <p>In the example below, we declare a variable called name and then use it inside JSX by wrapping it in curly braces:</p>
+            <code>const name = 'Josh Perez';
+                const element = <h1>Hello, {name}</h1>;
+                
+                ReactDOM.render(
+                  element,
+                  document.getElementById('root')
+                );
+            </code>
+            <p>You can put any valid JavaScript expression inside the curly braces in JSX. For example, 2 + 2, user.firstName, or formatName(user) are all valid JavaScript expressions.</p>
+            <p>In the example below, we embed the result of calling a JavaScript function, formatName(user), into an element.</p>
+                <code>
+                    function formatName(user) {
+                      return user.firstName + ' ' + user.lastName;
+                    }
+
+                    const user = {
+                      firstName: 'Harper',
+                      lastName: 'Perez'
+                    };
+
+                    const element = (
+                      <h1>
+                        Hello, {formatName(user)}!
+                      </h1>
+                    );
+                  
+                    ReactDOM.render(
+                      element,
+                      document.getElementById('root')
+                    );
+                </code>
+                <p>Try it on CodePen.</p>
+                <p>We split JSX over multiple lines for readability. While it isn’t required, when doing this, we also recommend wrapping it in parentheses to avoid the pitfalls of automatic semicolon insertion.
+
+                    JSX is an Expression Too
+                    After compilation, JSX expressions become regular JavaScript function calls and evaluate to JavaScript objects.
+                    
+                    This means that you can use JSX inside of if statements and for loops, assign it to variables, accept it as arguments, and return it from functions:
+                </p>
+                <code>
+                    function getGreeting(user) {
+                        if (user) {
+                          return <h1>Hello, {formatName(user)}!</h1>;
+                        }
+                        return <h1>Hello, Stranger.</h1>;
+                      }
+                </code>
+                <p>We will explore rendering React elements to the DOM in the next section.</p>
+            </section>
         <section class="main-section" id="Rendering_Elements">
-            <header>Rendering Elements</header>
+            <header class="main-section-header">Rendering Elements</header>
+            <p>Elements are the smallest building blocks of React apps.</p>
+            <p>An element describes what you want to see on the screen:</p>
+            <code>const element = <h1>Hello, world</h1>;</code>
+            <p>Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements.</p>
+            <h2>Rendering an Element into the DOM</h2>
+            <p>Let’s say there is a <code><div></code> somewhere in your HTML file:</p>
+            <code><div id="root"></div></code>
+            <p>We call this a “root” DOM node because everything inside it will be managed by React DOM. Applications built with just React usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like.</p>
+            <p>To render a React element into a root DOM node, pass both to ReactDOM.render():</p>
+            <code>const element = <h1>Hello, world</h1>;
+                ReactDOM.render(element, document.getElementById('root'));
+            </code>
+            <p>Try it on CodePen. It displays “Hello, world” on the page.</p>
         </section>
         <section class="main-section" id="Components_and_Props">
-            <header>Components and Props</header>
+            <header class="main-section-header">Components and Props</header>
+            <p>Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.</p>
+            <h2>Functional and Class Components</h2>
+            <p>The simplest way to define a component is to write a JavaScript function:</p>
+            <code>function Welcome(props) {
+                    return <h1>Hello, {props.name}</h1>;
+                  }
+            </code>
+            <p>This function is a valid React component because it accepts a single “props” (which stands for properties) object argument with data and returns a React element. We call such components “functional” because they are literally JavaScript functions.</p>
+            <h2>Rendering a Component</h2>
+            <p>Previously, we only encountered React elements that represent DOM tags:</p>
+            <code>const element = <div />;</code>
+            <p>However, elements can also represent user-defined components:</p>
+            <code>const element = <Welcome name="Sara" />;</code>
+            <p>When React sees an element representing a user-defined component, it passes JSX attributes to this component as a single object. We call this object “props”.
+
+            For example, this code renders “Hello, Sara” on the page:
+            </p>
+            <code>function Welcome(props) {
+                    return <h1>Hello, {props.name}</h1>;
+                  }
+                const element = <Welcome name="Sara" />;
+                ReactDOM.render(
+                  element,
+                  document.getElementById('root')
+                );
+            </code>
         </section>
         <section class="main-section" id="State_and_Lifecycle">
-            <header>State and Lifecycle</header>
+            <header class="main-section-header">State and Lifecycle</header>
+            <h2>Consider the ticking clock example from one of the previous sections.</h2>
+            <p>So far we have only learned one way to update the UI.
+
+                    We call ReactDOM.render() to change the rendered output:</p>
+            <code>
+                function tick() {
+  const element = (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    </div>
+  );
+  ReactDOM.render(
+    element,
+    document.getElementById('root')
+  );
+}
+setInterval(tick, 1000);
+            </code>
+
+<p>In this section, we will learn how to make the Clock component truly reusable and encapsulated. It will set up its own timer and update itself every second.
+
+        We can start by encapsulating how the clock looks:</p>
+
+<code>function Clock(props) {
+        return (
+          <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {props.date.toLocaleTimeString()}.</h2>
+          </div>
+        );
+      }
+      
+      function tick() {
+        ReactDOM.render(
+          <Clock date={new Date()} />,
+          document.getElementById('root')
+        );
+      }
+      
+      setInterval(tick, 1000);
+    </code>
+
+<p>However, it misses a crucial requirement: the fact that the Clock sets up a timer and updates the UI every second should be an implementation detail of the Clock.
+
+        Ideally we want to write this once and have the Clock update itself:</p>
+
+<code>ReactDOM.render(
+        <Clock />,
+        document.getElementById('root')
+      );</code>
+<p>To implement this, we need to add “state” to the Clock component.
+
+        State is similar to props, but it is private and fully controlled by the component.
+        
+        We mentioned before that components defined as classes have some additional features. Local state is exactly that: a feature available only to classes.</p>
         </section>
         <section class="main-section" id="Handling_Events">
-            <header>Handling Events</header>
-        </section>
-        <section class="main-section" id="Conditional_Rendering">
-            <header>Conditional Rendering</header>
-        </section>
-        <section class="main-section" id="List_and_Keys">
-            <header>List and Keys</header>
-        </section>
-        <section class="main-section" id="Forms">
-            <header>Forms</header>
-        </section>
-        <section class="main-section" id="Lifting_State_Up">
-            <header>Lifting State Up</header>
-        </section>
-        <section class="main-section" id="Composition_vs_Inheritance">
-            <header>Composition vs Inheritance</header>
-        </section>
-        <section class="main-section" id="Thinking_In_React">
-            <header>Thinking In React</header>
+            <header class="main-section-header">Handling Events</header>
+<h2>Handling events with React elements is very similar to handling events on DOM elements. There are some syntactic differences:</h2>
+<p>React events are named using camelCase, rather than lowercase.
+        With JSX you pass a function as the event handler, rather than a string.
+        For example, the HTML:</p>
+
+<code><button onclick="activateLasers()">
+        Activate Lasers
+      </button></code>
+<p>is slightly different in React:</p>
+
+<code><button onClick={activateLasers}>
+        Activate Lasers
+      </button></code>
+<p>Another difference is that you cannot return false to prevent default behavior in React. You must call preventDefault explicitly. For example, with plain HTML, to prevent the default link behavior of opening a new page, you can write:</p>
+<code><a href="#" onclick="console.log('The link was clicked.'); return false">
+        Click me
+      </a></code>
+<p>In React, this could instead be:
+    </p>
+<code>function ActionLink() {
+        function handleClick(e) {
+          e.preventDefault();
+          console.log('The link was clicked.');
+        }
+      
+        return (
+          <a href="#" onClick={handleClick}>
+            Click me
+          </a>
+        );
+      }</code>
+<p>Here, e is a synthetic event. React defines these synthetic events according to the W3C spec, so you don’t need to worry about cross-browser compatibility. See the SyntheticEvent reference guide to learn more.
+
+        When using React you should generally not need to call addEventListener to add listeners to a DOM element after it is created. Instead, just provide a listener when the element is initially rendered.
+        
+        When you define a component using an ES6 class, a common pattern is for an event handler to be a method on the class. For example, this Toggle component renders a button that lets the user toggle between “ON” and “OFF” states:
+        </p>
+<code>class Toggle extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {isToggleOn: true};
+      
+          // This binding is necessary to make `this` work in the callback
+          this.handleClick = this.handleClick.bind(this);
+        }
+      
+        handleClick() {
+          this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+          }));
+        }
+      
+        render() {
+          return (
+            <button onClick={this.handleClick}>
+              {this.state.isToggleOn ? 'ON' : 'OFF'}
+            </button>
+          );
+        }
+      }
+      ReactDOM.render(
+        <Toggle />,
+        document.getElementById('root')
+      );</code>
+
+<p>You have to be careful about the meaning of this in JSX callbacks. In JavaScript, class methods are not bound by default. If you forget to bind this.handleClick and pass it to onClick, this will be undefined when the function is actually called.
+
+        This is not React-specific behavior; it is a part of how functions work in JavaScript. Generally, if you refer to a method without () after it, such as onClick={this.handleClick}, you should bind that method.
+        
+        If calling bind annoys you, there are two ways you can get around this. If you are using the experimental public class fields syntax, you can use class fields to correctly bind callbacks:
+        </p>
+<code>class LoggingButton extends React.Component {
+        // This syntax ensures `this` is bound within handleClick.
+        // Warning: this is *experimental* syntax.
+        handleClick = () => {
+          console.log('this is:', this);
+        }
+      
+        render() {
+          return (
+            <button onClick={this.handleClick}>
+              Click me
+            </button>
+          );
+        }
+      }</code>
+<p>This syntax is enabled by default in Create React App.
+
+        If you aren’t using class fields syntax, you can use an arrow function in the callback:</p>
+
+<code>class LoggingButton extends React.Component {
+        handleClick() {
+          console.log('this is:', this);
+        }
+      
+        render() {
+          // This syntax ensures `this` is bound within handleClick
+          return (
+            <button onClick={(e) => this.handleClick(e)}>
+              Click me
+            </button>
+          );
+        }
+      }</code>
+<p>The problem with this syntax is that a different callback is created each time the LoggingButton renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.</p>
         </section>
     </main>
-    
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 </body>
-
-<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-
 </html>
