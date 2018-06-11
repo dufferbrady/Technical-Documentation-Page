@@ -7,8 +7,13 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet">
+
 </head>
 <body>
+    <section id="top-bar">
+        <header id="top-bar-title">React Technical Documentation</header>
+    </section>
     <nav id="navbar">
         <header id="navbar-header">React Docs</header>
         <a href="#Introduction" class="nav-link">Introduction</a>
@@ -30,7 +35,7 @@
             <header class="main-section-header">Hello World</header>
             <p>The easiest way to get started with React is to use this Hello World example code on CodePen. You don’t need to install anything; you can just open it in another tab and follow along as we go through examples. If you’d rather use a local development environment, check out the Installation section.
             <p>The smallest React example looks like this:</p>
-            <code>ReactDOM.render(
+            <code class = "code-section">ReactDOM.render(
                     <h1>Hello, world!</h1>,
                     document.getElementById('root')
                   );</code>
@@ -40,7 +45,7 @@
         <section class="main-section" id="Introducing_JSX">
             <header class="main-section-header">Introducing JSX</header>
             <h2>Consider this variable declaration:</h2>
-            <code>const element = <h1>Hello, world!</h1>;</code>
+            <code class = "code-section">const element = <h1>Hello, world!</h1>;</code>
             <p>This funny tag syntax is neither a string nor HTML.
                 It is called JSX, and it is a syntax extension to JavaScript. We recommend using it with React to describe what the UI should look like. JSX may remind you of a template language, but it comes with the full power of JavaScript.
                 JSX produces React “elements”. We will explore rendering them to the DOM in the next section. Below, you can find the basics of JSX necessary to get you started.
@@ -53,7 +58,7 @@
             </p>
             <h2>Embedding Expressions in JSX</h2>
             <p>In the example below, we declare a variable called name and then use it inside JSX by wrapping it in curly braces:</p>
-            <code>const name = 'Josh Perez';
+            <code class = "code-section">const name = 'Josh Perez';
                 const element = <h1>Hello, {name}</h1>;
                 
                 ReactDOM.render(
@@ -63,7 +68,7 @@
             </code>
             <p>You can put any valid JavaScript expression inside the curly braces in JSX. For example, 2 + 2, user.firstName, or formatName(user) are all valid JavaScript expressions.</p>
             <p>In the example below, we embed the result of calling a JavaScript function, formatName(user), into an element.</p>
-                <code>
+                <code class = "code-section">
                     function formatName(user) {
                       return user.firstName + ' ' + user.lastName;
                     }
@@ -92,7 +97,7 @@
                     
                     This means that you can use JSX inside of if statements and for loops, assign it to variables, accept it as arguments, and return it from functions:
                 </p>
-                <code>
+                <code class = "code-section">
                     function getGreeting(user) {
                         if (user) {
                           return <h1>Hello, {formatName(user)}!</h1>;
@@ -106,14 +111,14 @@
             <header class="main-section-header">Rendering Elements</header>
             <p>Elements are the smallest building blocks of React apps.</p>
             <p>An element describes what you want to see on the screen:</p>
-            <code>const element = <h1>Hello, world</h1>;</code>
+            <code class = "code-section">const element = <h1>Hello, world</h1>;</code>
             <p>Unlike browser DOM elements, React elements are plain objects, and are cheap to create. React DOM takes care of updating the DOM to match the React elements.</p>
             <h2>Rendering an Element into the DOM</h2>
-            <p>Let’s say there is a <code><div></code> somewhere in your HTML file:</p>
-            <code><div id="root"></div></code>
+            <p>Let’s say there is a <code class = "code-section"><div></code> somewhere in your HTML file:</p>
+            <code class = "code-section"><div id="root"></div></code>
             <p>We call this a “root” DOM node because everything inside it will be managed by React DOM. Applications built with just React usually have a single root DOM node. If you are integrating React into an existing app, you may have as many isolated root DOM nodes as you like.</p>
             <p>To render a React element into a root DOM node, pass both to ReactDOM.render():</p>
-            <code>const element = <h1>Hello, world</h1>;
+            <code class = "code-section">const element = <h1>Hello, world</h1>;
                 ReactDOM.render(element, document.getElementById('root'));
             </code>
             <p>Try it on CodePen. It displays “Hello, world” on the page.</p>
@@ -123,21 +128,21 @@
             <p>Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.</p>
             <h2>Functional and Class Components</h2>
             <p>The simplest way to define a component is to write a JavaScript function:</p>
-            <code>function Welcome(props) {
+            <code class = "code-section">function Welcome(props) {
                     return <h1>Hello, {props.name}</h1>;
                   }
             </code>
             <p>This function is a valid React component because it accepts a single “props” (which stands for properties) object argument with data and returns a React element. We call such components “functional” because they are literally JavaScript functions.</p>
             <h2>Rendering a Component</h2>
             <p>Previously, we only encountered React elements that represent DOM tags:</p>
-            <code>const element = <div />;</code>
+            <code class = "code-section">const element = <div />;</code>
             <p>However, elements can also represent user-defined components:</p>
-            <code>const element = <Welcome name="Sara" />;</code>
+            <code class = "code-section">const element = <Welcome name="Sara" />;</code>
             <p>When React sees an element representing a user-defined component, it passes JSX attributes to this component as a single object. We call this object “props”.
 
             For example, this code renders “Hello, Sara” on the page:
             </p>
-            <code>function Welcome(props) {
+            <code class = "code-section">function Welcome(props) {
                     return <h1>Hello, {props.name}</h1>;
                   }
                 const element = <Welcome name="Sara" />;
@@ -153,7 +158,7 @@
             <p>So far we have only learned one way to update the UI.
 
                     We call ReactDOM.render() to change the rendered output:</p>
-            <code>
+            <code class = "code-section">
                 function tick() {
   const element = (
     <div>
@@ -173,7 +178,7 @@ setInterval(tick, 1000);
 
         We can start by encapsulating how the clock looks:</p>
 
-<code>function Clock(props) {
+<code class = "code-section">function Clock(props) {
         return (
           <div>
             <h1>Hello, world!</h1>
@@ -196,7 +201,7 @@ setInterval(tick, 1000);
 
         Ideally we want to write this once and have the Clock update itself:</p>
 
-<code>ReactDOM.render(
+<code class = "code-section">ReactDOM.render(
         <Clock />,
         document.getElementById('root')
       );</code>
@@ -213,21 +218,21 @@ setInterval(tick, 1000);
         With JSX you pass a function as the event handler, rather than a string.
         For example, the HTML:</p>
 
-<code><button onclick="activateLasers()">
+<code class = "code-section"><button onclick="activateLasers()">
         Activate Lasers
       </button></code>
 <p>is slightly different in React:</p>
 
-<code><button onClick={activateLasers}>
+<code class = "code-section"><button onClick={activateLasers}>
         Activate Lasers
       </button></code>
 <p>Another difference is that you cannot return false to prevent default behavior in React. You must call preventDefault explicitly. For example, with plain HTML, to prevent the default link behavior of opening a new page, you can write:</p>
-<code><a href="#" onclick="console.log('The link was clicked.'); return false">
+<code class = "code-section"><a href="#" onclick="console.log('The link was clicked.'); return false">
         Click me
       </a></code>
 <p>In React, this could instead be:
     </p>
-<code>function ActionLink() {
+<code class = "code-section">function ActionLink() {
         function handleClick(e) {
           e.preventDefault();
           console.log('The link was clicked.');
@@ -245,7 +250,7 @@ setInterval(tick, 1000);
         
         When you define a component using an ES6 class, a common pattern is for an event handler to be a method on the class. For example, this Toggle component renders a button that lets the user toggle between “ON” and “OFF” states:
         </p>
-<code>class Toggle extends React.Component {
+<code class = "code-section">class Toggle extends React.Component {
         constructor(props) {
           super(props);
           this.state = {isToggleOn: true};
@@ -279,7 +284,7 @@ setInterval(tick, 1000);
         
         If calling bind annoys you, there are two ways you can get around this. If you are using the experimental public class fields syntax, you can use class fields to correctly bind callbacks:
         </p>
-<code>class LoggingButton extends React.Component {
+<code class = "code-section">class LoggingButton extends React.Component {
         // This syntax ensures `this` is bound within handleClick.
         // Warning: this is *experimental* syntax.
         handleClick = () => {
@@ -298,7 +303,7 @@ setInterval(tick, 1000);
 
         If you aren’t using class fields syntax, you can use an arrow function in the callback:</p>
 
-<code>class LoggingButton extends React.Component {
+<code class = "code-section">class LoggingButton extends React.Component {
         handleClick() {
           console.log('this is:', this);
         }
@@ -315,6 +320,10 @@ setInterval(tick, 1000);
 <p>The problem with this syntax is that a different callback is created each time the LoggingButton renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.</p>
         </section>
     </main>
+    <section id="footer">
+            <footer id="footer-title">React Documentation</footer>
+        </section>
+        
     <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 </body>
 </html>
